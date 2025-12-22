@@ -24,7 +24,7 @@ const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [roleLoading, setRoleLoading] = useState(true);
   const [role, setRole] = useState("");
-  const [userStatus, setUserStatus] =useState("")
+  const [userStatus, setUserStatus] = useState("");
 
   const googleSignIn = () => {
     setLoading(true);
@@ -63,7 +63,7 @@ const AuthProvider = ({ children }) => {
     return signOut(auth);
   };
 
-  // console.log(user);
+
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
@@ -75,13 +75,26 @@ const AuthProvider = ({ children }) => {
   }, []);
 
   useEffect(() => {
-    if (!user) return;
-    axios.get(`http://localhost:3000/users/role/${user.email}`).then((res) => {
-      setRole(res.data.role);
-      setUserStatus(res.data.status)
+    if (!loading && !user) {
       setRoleLoading(false);
-    });
-  }, [user]);
+      return;
+    }
+
+    if (user?.email) {
+      axios
+        .get(`http://localhost:3000/users/role/${user.email}`)
+        .then((res) => {
+          setRole(res.data.role);
+          setUserStatus(res.data.status);
+        })
+        .catch((err) => {
+          console.error("Error fetching role:", err);
+        })
+        .finally(() => {
+          setRoleLoading(false);
+        });
+    }
+  }, [user, loading]);
 
   const authData = {
     role,
@@ -95,7 +108,7 @@ const AuthProvider = ({ children }) => {
     resetPassword,
     setLoading,
     roleLoading,
-    userStatus
+    userStatus,
   };
 
   return (
