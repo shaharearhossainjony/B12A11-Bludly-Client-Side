@@ -5,7 +5,7 @@ function App() {
   return (
     <>
       
-      <h1 className='text-red-500'>Bludly - Donate Blood, Save Life</h1>
+      <h1 >Bludly - Donate Blood , Save Life</h1>
       
       
     </>
