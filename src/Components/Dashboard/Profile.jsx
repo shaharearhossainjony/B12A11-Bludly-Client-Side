@@ -5,6 +5,7 @@ import axios from "axios";
 import { Edit2, Save, X, User, MapPin, Droplets, Mail, Loader2 } from "lucide-react";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
+import LoaderSpinner from "../LoaderSpinner/LoaderSpinner";
 
 const ProfilePage = () => {
   const { user, updateUser, role } = useContext(AuthContext);
@@ -27,7 +28,7 @@ const ProfilePage = () => {
     if (user?.email) {
       setProfileLoading(true);
       axiosSecure
-        .get(`http://localhost:3000/users/${user.email}`)
+        .get(`/users/${user.email}`)
         .then((res) => {
           const data = res.data;
           setFormData({
@@ -77,7 +78,7 @@ const ProfilePage = () => {
 
 
       const response = await axiosSecure.patch(
-        `http://localhost:3000/users/update/${user.email}`,
+        `/users/update/${user.email}`,
         updatedData
       );
 
@@ -110,7 +111,7 @@ const ProfilePage = () => {
   if (profileLoading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
-        <Loader2 className="animate-spin text-red-600" size={40} />
+        <LoaderSpinner></LoaderSpinner>
       </div>
     );
   }

@@ -5,9 +5,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router";
 import axios from "axios";
+import useAxiosSecure from "../../Hooks/useAxiosSecure";
 
 const Register = () => {
   const { createUser, updateUser } = useContext(AuthContext);
+  const axiosSecure = useAxiosSecure()
 
   const [nameError, setNameError] = useState("");
   const [passwordError, setPasswordError] = useState("");
@@ -95,8 +97,8 @@ const Register = () => {
       createUser(email, password)
         .then(() => {
           updateUser({ displayName: name, photoURL: mainPhotoURL }).then(() => {
-            axios
-              .post("http://localhost:3000/users", formData)
+            axiosSecure
+              .post("/users", formData)
               .then((res) => {
                 console.log(res.data);
                 form.reset();

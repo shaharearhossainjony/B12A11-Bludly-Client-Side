@@ -5,6 +5,7 @@ import { Edit, Trash2, Eye, ChevronLeft, ChevronRight, Filter } from 'lucide-rea
 import { useNavigate } from 'react-router';
 import Swal from 'sweetalert2';
 import { AuthContext } from '../../Provider/AuthProvider'; 
+import LoaderSpinner from '../LoaderSpinner/LoaderSpinner';
 
 const MyDonationRequests = () => {
     const axiosSecure = useAxiosSecure();
@@ -87,7 +88,7 @@ const MyDonationRequests = () => {
         });
     };
 
-    if (loading) return <div className="text-center p-10 font-bold">Loading...</div>;
+    if (loading) return <div className="text-center p-10 font-bold"><LoaderSpinner></LoaderSpinner></div>;
 
     return (
         <div className="p-6 bg-white rounded-xl shadow-sm border border-gray-100">

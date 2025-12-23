@@ -82,7 +82,7 @@ const AuthProvider = ({ children }) => {
 
     if (user?.email) {
       axios
-        .get(`http://localhost:3000/users/role/${user.email}`)
+        .get(`https://b12-a11-bludly-server-side.vercel.app/users/role/${user.email}`)
         .then((res) => {
           setRole(res.data.role);
           setUserStatus(res.data.status);
