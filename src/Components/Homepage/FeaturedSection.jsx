@@ -1,46 +1,68 @@
+
+
 import React from 'react';
 import { Heart, Activity, ShieldCheck, Users } from 'lucide-react';
 
 const FeaturedSection = () => {
   const features = [
     {
-      icon: <Heart className="text-red-500" size={40} />,
+      icon: <Heart className="text-red-500" size={32} />,
       title: "Save Lives",
       desc: "One single donation can save up to three lives in emergency situations."
     },
     {
-      icon: <ShieldCheck className="text-blue-500" size={40} />,
+      icon: <ShieldCheck className="text-blue-500" size={32} />,
       title: "Verified Donors",
       desc: "Our platform ensures all donor profiles are verified for safety and reliability."
     },
     {
-      icon: <Activity className="text-green-500" size={40} />,
+      icon: <Activity className="text-green-500" size={32} />,
       title: "Health Benefits",
       desc: "Regular donation helps in maintaining healthy iron levels and heart health."
     },
     {
-      icon: <Users className="text-purple-500" size={40} />,
+      icon: <Users className="text-purple-500" size={32} />,
       title: "Community",
       desc: "Join thousands of volunteers and donors dedicated to making a difference."
     }
   ];
 
   return (
-    <section className="py-20 bg-white">
+    <section className="py-24 bg-base-100 transition-colors duration-500">
       <div className="container mx-auto px-6">
+        
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Why Choose Bludly?</h2>
-          <div className="w-20 h-1 bg-red-500 mx-auto"></div>
+          <h2 className="text-4xl md:text-5xl font-heading font-black text-base-content mb-4">
+            Why Choose <span className="text-red-600">Bludly?</span>
+          </h2>
+          <div className="w-24 h-1.5 bg-red-600 mx-auto rounded-full"></div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {features.map((item, idx) => (
-            <div key={idx} className="p-8 rounded-2xl bg-gray-50 hover:bg-red-50 transition-colors group border border-transparent hover:border-red-100">
-              <div className="mb-4 bg-white w-16 h-16 rounded-xl flex items-center justify-center shadow-sm group-hover:scale-110 transition-transform">
+            <div 
+              key={idx} 
+              className="group p-8 rounded-3xl bg-base-200/50 dark:bg-slate-900/50 border border-gray-100 dark:border-white/5 
+                         hover:bg-red-600 transition-all duration-300 
+                         hover:shadow-2xl hover:shadow-red-500/40 hover:-translate-y-2"
+            >
+              {/* Icon Container */}
+              <div className="mb-6 bg-white dark:bg-slate-800 w-16 h-16 rounded-2xl flex items-center justify-center 
+                              shadow-sm group-hover:bg-white group-hover:scale-110 transition-all duration-300">
                 {item.icon}
               </div>
-              <h3 className="text-xl font-bold text-gray-800 mb-2">{item.title}</h3>
-              <p className="text-gray-600 leading-relaxed">{item.desc}</p>
+
+              {/* Title: group-hover e color white hobe */}
+              <h3 className="text-xl font-heading font-bold text-base-content mb-3 
+                             group-hover:text-white transition-colors duration-300">
+                {item.title}
+              </h3>
+              
+              {/* Description: group-hover e text white/90 hobe */}
+              <p className="font-body leading-relaxed text-base text-base-content/70 
+                            group-hover:text-white/90 transition-colors duration-300">
+                {item.desc}
+              </p>
             </div>
           ))}
         </div>

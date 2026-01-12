@@ -1,7 +1,11 @@
+
+
+
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../Provider/AuthProvider";
-import useAxiosSecure from "../../hooks/useAxiosSecure";
+import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import LoaderSpinner from "../LoaderSpinner/LoaderSpinner";
+import { DollarSign, Gift, Calendar, User, TrendingUp, CreditCard } from "lucide-react";
 
 const FundingPage = () => {
   const { user } = useContext(AuthContext);
@@ -10,7 +14,6 @@ const FundingPage = () => {
   const [donors, setDonors] = useState([]);
   const [loading, setLoading] = useState(true);
 
- 
   useEffect(() => {
     const fetchPayments = async () => {
       try {
@@ -48,56 +51,131 @@ const FundingPage = () => {
   if (loading) return <LoaderSpinner />;
 
   return (
-    <div className="py-10 min-h-screen bg-gradient-to-br from-red-50 via-pink-50 to-red-100 flex items-center justify-center px-4">
-      <div className="max-w-4xl w-full bg-white shadow-2xl rounded-2xl p-8">
-        <h2 className="text-3xl font-bold text-center text-red-600 mb-2">Fund for Blood Donation</h2>
-        <p className="text-center text-gray-600 mb-8">Your contribution helps save lives </p>
-
-        {/* Donation Form */}
-        <div className="bg-red-50 border border-red-200 rounded-xl p-6 mb-10">
-          <form onSubmit={handleSubmit} className="grid md:grid-cols-3 gap-4">
-            <input
-              type="text"
-              value={user?.displayName || ""}
-              readOnly
-              className="px-4 py-2 border rounded-md bg-gray-100 outline-none cursor-not-allowed"
-            />
-            <input
-              type="number"
-              required
-              value={amount}
-              onChange={(e) => setAmount(e.target.value)}
-              placeholder="Amount (USD)"
-              className="px-4 py-2 border rounded-md focus:ring-2 focus:ring-red-400"
-            />
-            <button type="submit" className="bg-red-600 hover:bg-red-700 text-white rounded-md font-semibold transition py-2">
-              Donate Now
-            </button>
-          </form>
+    <div className="py-8 md:py-16 min-h-screen bg-base-100 transition-colors duration-500 px-4 font-body">
+      <div className="max-w-6xl w-full mx-auto">
+        
+        {/* Header Section */}
+        <div className="text-center mb-10 md:mb-16">
+            <h2 className="text-3xl md:text-5xl font-heading font-black text-red-600 mb-4 tracking-tighter">
+                Fuel Our <span className="text-base-content">Mission</span>
+            </h2>
+            <p className="text-base-content/60 max-w-xl mx-auto font-medium italic text-sm md:text-base px-2">
+                Your financial contribution helps us maintain the infrastructure to save lives 24/7.
+            </p>
+            <div className="w-20 md:w-24 h-1.5 bg-red-600 mx-auto mt-6 rounded-full"></div>
         </div>
 
-        {/* Table */}
-        <div className="overflow-x-auto">
-          <table className="min-w-full border border-gray-200 rounded-lg">
-            <thead className="bg-red-600 text-white">
-              <tr>
-                <th className="px-4 py-2 text-left">Serial</th>
-                <th className="px-4 py-2 text-left">Name</th>
-                <th className="px-4 py-2 text-left">Amount ($)</th>
-                <th className="px-4 py-2 text-left">Date</th>
-              </tr>
-            </thead>
-            <tbody>
-              {donors.map((donor, index) => (
-                <tr key={donor._id} className="border-b hover:bg-red-50">
-                  <td className="px-4 py-2">{index + 1}</td>
-                  <td className="px-4 py-2 font-medium">{donor.customer_name || "Donor"}</td>
-                  <td className="px-4 py-2 font-bold text-red-600">${donor.amount}</td>
-                  <td className="px-4 py-2">{new Date(donor.paidAt).toLocaleDateString("en-GB")}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+        {/* Responsive Grid Layout */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 md:gap-10">
+          
+          {/* Donation Form Card */}
+          <div className="lg:col-span-1 order-2 lg:order-1">
+            <div className="bg-base-100 dark:bg-zinc-900 shadow-2xl rounded-[2rem] p-6 md:p-8 border border-base-200 dark:border-white/5 sticky top-24">
+              <div className="flex items-center gap-3 mb-8">
+                <div className="bg-red-600 p-3 rounded-2xl text-white">
+                    <Gift size={24} />
+                </div>
+                <h3 className="text-xl font-heading font-black text-base-content">Make a Donation</h3>
+              </div>
+
+              <form onSubmit={handleSubmit} className="space-y-6">
+                <div className="space-y-2">
+                  <label className="text-xs font-black uppercase text-base-content/40 ml-1 tracking-widest italic">Donor Name</label>
+                  <div className="relative">
+                    <User className="absolute left-4 top-1/2 -translate-y-1/2 text-base-content/30" size={18} />
+                    <input
+                        type="text"
+                        value={user?.displayName || "Anonymous Donor"}
+                        readOnly
+                        className="w-full pl-12 pr-4 py-4 bg-base-200 dark:bg-zinc-800 border-none rounded-2xl text-base-content font-bold outline-none cursor-not-allowed text-sm"
+                    />
+                  </div>
+                </div>
+
+                <div className="space-y-2">
+                  <label className="text-xs font-black uppercase text-base-content/40 ml-1 tracking-widest italic">Amount (USD)</label>
+                  <div className="relative">
+                    <DollarSign className="absolute left-4 top-1/2 -translate-y-1/2 text-red-600 font-bold" size={18} />
+                    <input
+                        type="number"
+                        required
+                        value={amount}
+                        onChange={(e) => setAmount(e.target.value)}
+                        placeholder="Enter amount"
+                        className="w-full pl-12 pr-4 py-4 bg-base-100 dark:bg-zinc-800 border-2 border-base-200 dark:border-zinc-700 rounded-2xl text-base-content font-bold focus:border-red-600 focus:ring-4 focus:ring-red-600/10 outline-none transition-all placeholder:text-base-content/20 text-sm"
+                    />
+                  </div>
+                </div>
+
+                <button 
+                  type="submit" 
+                  className="w-full bg-red-600 hover:bg-red-700 text-white font-black py-4 rounded-2xl shadow-xl shadow-red-500/20 transition-all active:scale-95 uppercase tracking-widest text-xs md:text-sm flex items-center justify-center gap-2"
+                >
+                  <CreditCard size={18} /> Confirm & Pay
+                </button>
+              </form>
+            </div>
+          </div>
+
+          {/* Donation History Table */}
+          <div className="lg:col-span-2 order-1 lg:order-2">
+            <div className="bg-base-100 dark:bg-zinc-900 shadow-xl rounded-[2rem] overflow-hidden border border-base-200 dark:border-white/5">
+              <div className="p-6 md:p-8 border-b border-base-200 dark:border-white/5 flex justify-between items-center bg-base-100 dark:bg-zinc-900">
+                <h3 className="text-lg md:text-xl font-heading font-black text-base-content flex items-center gap-2">
+                    <TrendingUp className="text-emerald-500" /> Recent Contributors
+                </h3>
+                <span className="badge badge-error badge-outline font-black text-[10px] uppercase px-3 py-3 md:py-4">{donors.length} Donors</span>
+              </div>
+
+              <div className="overflow-x-auto">
+                <table className="table w-full">
+                  <thead className="bg-base-200 dark:bg-zinc-800/50">
+                    <tr className="border-none text-base-content/40 uppercase text-[10px] tracking-widest">
+                      <th className="py-5 pl-6 md:pl-8">#</th>
+                      <th>Donor</th>
+                      <th>Amount</th>
+                      <th className="pr-6 md:pr-8 text-right lg:text-left">Date</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {donors.map((donor, index) => (
+                      <tr key={donor._id} className="border-b border-base-200 dark:border-white/5 hover:bg-base-200/50 dark:hover:bg-zinc-800/50 transition-colors group">
+                        <td className="py-5 pl-6 md:pl-8 font-bold text-base-content/30 text-xs md:text-sm">{index + 1}</td>
+                        <td>
+                          <div className="flex items-center gap-3">
+                            <div className="hidden sm:flex w-8 h-8 rounded-full bg-red-100 dark:bg-red-900/30 text-red-600 items-center justify-center font-black text-[10px]">
+                                {donor.customer_name?.charAt(0) || "D"}
+                            </div>
+                            <span className="font-bold text-base-content text-xs md:text-sm line-clamp-1 truncate max-w-[80px] md:max-w-full">
+                                {donor.customer_name || "Donor"}
+                            </span>
+                          </div>
+                        </td>
+                        <td>
+                          <span className="bg-emerald-50 dark:bg-emerald-950/30 text-emerald-600 dark:text-emerald-400 px-2 md:px-3 py-1 rounded-lg font-black text-[10px] md:text-sm whitespace-nowrap">
+                            ${donor.amount}
+                          </span>
+                        </td>
+                        <td className="pr-6 md:pr-8 text-right lg:text-left">
+                          <div className="flex items-center justify-end lg:justify-start gap-1 md:gap-2 text-base-content/50 text-[10px] md:text-xs font-bold whitespace-nowrap">
+                            <Calendar size={12} className="hidden xs:block" />
+                            {new Date(donor.paidAt).toLocaleDateString("en-GB")}
+                          </div>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+
+              {donors.length === 0 && (
+                  <div className="py-20 text-center text-base-content/20 italic font-bold">
+                      No contributions found yet. Be the first one!
+                  </div>
+              )}
+            </div>
+          </div>
+
         </div>
       </div>
     </div>

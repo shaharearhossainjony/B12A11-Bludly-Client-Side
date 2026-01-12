@@ -1,2 +1,17 @@
 @import "tailwindcss";
 @plugin "daisyui";
+
+@layer base {
+  :root {
+    --color-primary: #D32F2F;
+    --color-primary-content: #FFFFFF;
+  }
+
+  /* ডার্ক মোডের জন্য স্পেসিফিক অ্যাডজাস্টমেন্ট (প্রয়োজন হলে) */
+  [data-theme="dark"] {
+    --color-primary: #FF5252;
+  }
+}
+
+/* ফন্ট ইমপোর্ট */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Inter:wght@400;500&display=swap');

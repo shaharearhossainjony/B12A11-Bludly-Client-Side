@@ -1,77 +1,54 @@
-import React from 'react';
-import { Phone, Mail, MapPin, Send } from 'lucide-react';
+
+import React, { useState } from "react";
+import { PhoneIncoming } from "lucide-react";
 
 const ContactUs = () => {
+  const [status, setStatus] = useState("idle");
+
   const handleSubmit = (e) => {
     e.preventDefault();
- 
+    setStatus("loading");
+    setTimeout(() => {
+      setStatus("success");
+      setTimeout(() => setStatus("idle"), 5000);
+    }, 1500);
   };
 
   return (
-    <section className="py-20 bg-gray-50">
-      <div className="container mx-auto px-6">
-        <div className="bg-white rounded-3xl shadow-xl overflow-hidden flex flex-col lg:flex-row">
+    <>
+      {/* --- EMERGENCY SUPPORT SECTION --- */}
+      <section className="py-20 px-4">
+        <div className="max-w-7xl mx-auto bg-base-200 dark:bg-zinc-900 rounded-[3rem] p-10 md:p-20 flex flex-col md:flex-row items-center justify-between gap-10 border border-base-300 dark:border-white/5 shadow-2xl">
           
- 
-          <div className="lg:w-1/3 bg-red-600 p-12 text-white flex flex-col justify-between">
-            <div>
-              <h2 className="text-3xl font-bold mb-6">Contact Us</h2>
-              <p className="opacity-80 mb-10">
-                Have questions or need urgent blood support? Reach out to our 24/7 support team.
-              </p>
-              
-              <div className="space-y-6">
-                <div className="flex items-center gap-4">
-                  <div className="bg-white/20 p-3 rounded-lg"><Phone size={24} /></div>
-                  <div>
-                    <p className="text-xs uppercase opacity-60">Call Us</p>
-                    <p className="font-bold">+880 1234-567890</p>
-                  </div>
-                </div>
-                <div className="flex items-center gap-4">
-                  <div className="bg-white/20 p-3 rounded-lg"><Mail size={24} /></div>
-                  <div>
-                    <p className="text-xs uppercase opacity-60">Email Us</p>
-                    <p className="font-bold">support@bludly.org</p>
-                  </div>
-                </div>
-                <div className="flex items-center gap-4">
-                  <div className="bg-white/20 p-3 rounded-lg"><MapPin size={24} /></div>
-                  <div>
-                    <p className="text-xs uppercase opacity-60">Location</p>
-                    <p className="font-bold">Dhanmondi, Dhaka, Bangladesh</p>
-                  </div>
-                </div>
+          <div className="space-y-6 text-center md:text-left">
+            <h2 className="text-4xl md:text-5xl font-black text-base-content tracking-tighter leading-none uppercase">
+              In Need of <br />
+              <span className="text-red-600 underline">Emergency</span> Blood?
+            </h2>
+
+            <p className="text-base-content/60 max-w-md font-medium">
+              Our 24/7 volunteer team is ready to assist you in finding the nearest donor immediately.
+              Don't wait.
+            </p>
+
+            <div className="flex flex-col sm:flex-row items-center gap-4">
+              <button className="btn btn-error bg-red-600 hover:bg-red-700 text-white border-none rounded-2xl px-8 h-16 font-black uppercase tracking-widest shadow-xl shadow-red-600/20">
+                Call Support Now
+              </button>
+
+              <div className="flex items-center gap-3 text-red-600 font-black">
+                <PhoneIncoming />
+                <span>+8801771420235</span>
               </div>
             </div>
           </div>
 
-       
-          <div className="lg:w-2/3 p-12">
-            <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="flex flex-col gap-2">
-                <label className="text-sm font-bold text-gray-700">Full Name</label>
-                <input type="text" placeholder="John Doe" className="input input-bordered w-full bg-gray-50 focus:bg-white" required />
-              </div>
-              <div className="flex flex-col gap-2">
-                <label className="text-sm font-bold text-gray-700">Email Address</label>
-                <input type="email" placeholder="john@example.com" className="input input-bordered w-full bg-gray-50 focus:bg-white" required />
-              </div>
-              <div className="flex flex-col gap-2 md:col-span-2">
-                <label className="text-sm font-bold text-gray-700">Message</label>
-                <textarea rows="4" placeholder="How can we help you?" className="textarea textarea-bordered w-full bg-gray-50 focus:bg-white" required></textarea>
-              </div>
-              <div className="md:col-span-2">
-                <button type="submit" className="btn btn-error text-white px-10 rounded-full flex items-center gap-2">
-                  <Send size={18} /> Send Message
-                </button>
-              </div>
-            </form>
+          <div className="text-9xl md:text-[12rem] animate-pulse opacity-20 hidden md:block">
+            🆘
           </div>
-
         </div>
-      </div>
-    </section>
+      </section>
+    </>
   );
 };
 

@@ -1,16 +1,17 @@
 
 import React from "react";
-import { Ripples } from "ldrs/react";
-import "ldrs/react/Ripples.css";
+import { Hourglass } from "ldrs/react";
+import "ldrs/react/Hourglass.css";
 
 const LoaderSpinner = ({
-  size = 50,
-  speed = 1.5,
-  color = "purple",
+  size = 40,
+  speed = 1.75,
+  bgOpacity=0.1,
+  color = "red",
 }) => {
   return (
     <div className="flex items-center justify-center min-h-[200px]">
-      <Ripples size={size} speed={speed} color={color} />
+      <Hourglass size={size} speed={speed} color={color} bgOpacity={bgOpacity} />
     </div>
   );
 };

@@ -18,6 +18,10 @@ import DonationRequestsDetails from "../Components/Homepage/DonationRequestsDeta
 import MyDonationRequests from "../Components/Dashboard/MyDonationRequests";
 import PaymentCancelled from "../Components/Homepage/PaymentCancelled";
 import PaymentSuccess from "../Components/Homepage/PaymentSuccess";
+import AboutUs from "../Components/Homepage/AboutUs";
+import Contact from "../Components/Homepage/Contact";
+import Privacy from "../Components/Homepage/Privacy";
+import Terms from "../Components/Homepage/Terms";
 
 
 const router = createBrowserRouter([
@@ -48,7 +52,7 @@ const router = createBrowserRouter([
             },
             {
                 path: '/request-details/:id',
-                element:<PrivateRoute><DonationRequestsDetails></DonationRequestsDetails></PrivateRoute>
+                element:<DonationRequestsDetails></DonationRequestsDetails>
             },
             {
                 path:'/create-payment-checkout',
@@ -65,6 +69,25 @@ const router = createBrowserRouter([
             { 
                 path : '/blogs',
                 element:<Blogs></Blogs>
+            },
+            { 
+                path : '/about',
+                element:<AboutUs></AboutUs>
+            }
+            ,
+            { 
+                path : '/contact',
+                element:<Contact></Contact>
+            }
+            ,
+            { 
+                path : '/privacy',
+                element:<Privacy></Privacy>
+            }
+            ,
+            { 
+                path : '/terms',
+                element:<Terms></Terms>
             }
 
         ]
